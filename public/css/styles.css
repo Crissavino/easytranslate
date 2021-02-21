@@ -45,8 +45,19 @@ input, select {
 
 .exchange {
     padding-top: 8px;
+    padding-left: 16px;
     font-weight: bold;
     color: rgb(92, 102, 123);
+}
+
+@media (max-width: 766px) {
+    .result {
+        padding-top: 0;
+    }
+
+    .exchange {
+        padding-top: 0;
+    }
 }
 
 .exchange-arrow {

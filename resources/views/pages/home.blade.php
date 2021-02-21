@@ -35,8 +35,8 @@
     @if(isset($success) && $success)
         <div class="container col-10 conversion-result">
             <h2 class="text-center pt-1">Exchange Result</h2>
-            <div class="result d-flex justify-content-around align-items-center pt-3">{{$amount . ' ' . $source_currency . ' to ' . $target_currency . ' = ' . $convertedAmount . ' ' . $target_currency}}</div> <br>
-            <div class="exchange pt-2">{{'1 ' . $source_currency . ' = ' . $exchangeRate . ' ' . $target_currency}}</div>
+            <div class="result text-center">{{$amount . ' ' . $source_currency . ' to ' . $target_currency . ' = ' . number_format($convertedAmount,4) . ' ' . $target_currency}}</div> <br>
+            <div class="exchange">{{'1 ' . $source_currency . ' = ' . number_format($exchangeRate,5) . ' ' . $target_currency}}</div>
         </div>
     @endif
 @endsection
