@@ -34,8 +34,11 @@ class PagesController extends Controller
 
             // Decode JSON response:
             $exchangeRates = json_decode($json, true);
+
+            // Get exchange rates for selected currencies
             $exchangeSource = $exchangeRates['rates'][$source_currency];
             $exchangeTarget = $exchangeRates['rates'][$target_currency];
+
             $exchangeRate = $exchangeTarget / $exchangeSource;
 
             $convertedAmount = $exchangeRate * $amount;
