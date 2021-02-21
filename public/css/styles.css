@@ -1,0 +1,75 @@
+.gradient {
+    background: #2a2a72 linear-gradient(315deg, #2a2a72 0%, #009ffd 74%) !important;
+    background-size: cover !important;
+}
+
+header {
+    width: 100%;
+    height: 200px;
+}
+
+.content {
+    height: 600px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+input, select {
+    border: 2px solid rgb(117, 117, 117) !important;
+}
+
+.conversion-box {
+    height: 50%;
+    border-radius: 30px;
+    background-color: white;
+    box-shadow: 0 15px 45px 0 rgb(60 66 87 / 8%), 0 5px 25px 0 rgb(0 0 0 / 12%);
+}
+
+.conversion-result {
+    height: 30%;
+    margin-top: 30px;
+    border-radius: 30px;
+    background-color: white;
+    box-shadow: 0 15px 45px 0 rgb(60 66 87 / 8%), 0 5px 25px 0 rgb(0 0 0 / 12%);
+}
+
+.result {
+    font-weight: bold;
+    font-size: 30px;
+    color: rgb(92, 102, 123);
+    padding-top: 16px;
+}
+
+.exchange {
+    padding-top: 8px;
+    font-weight: bold;
+    color: rgb(92, 102, 123);
+}
+
+.exchange-arrow {
+    width: 50px;
+    height: 30px;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    font-size: 40px;
+}
+
+footer {
+    width: 100%;
+    height: 70px;
+    color: white;
+    background-color: black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    z-index: 1000;
+    font-weight: bold;
+    position: fixed;
+    bottom: 0;
+}
