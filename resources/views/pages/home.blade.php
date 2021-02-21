@@ -10,19 +10,19 @@
             <div class="row">
                 <div class="mx-auto my-3 col-12 col-lg-3 d-block">
                     <label for="amount">Amount</label>
-                    <input type="number" step=any name="amount" class="form-control">
+                    <input type="number" step=any name="amount" class="form-control" placeholder="$" value="{{request()->old('amount')}}">
                 </div>
                 <div class="m-auto col-5 col-lg-3 d-block">
-                    <label for="fromCurrency">From</label>
+                    <label for="fromCurrency">Source</label>
                     <select name="source_currency" id="fromCurrency" class="form-control">
-                        <option value="">From...</option>
+                        <option value="">Currency...</option>
                     </select>
                 </div>
                 <img class="m-auto exchange-arrow" src="{{asset('/img/transfer.png')}}" alt="exchange money symbol">
                 <div class="m-auto col-5 col-lg-3 d-block">
-                    <label for="toCurrency">To</label>
+                    <label for="toCurrency">Target</label>
                     <select name="target_currency" id="toCurrency" class="form-control">
-                        <option value="">To...</option>
+                        <option value="">Currency...</option>
                     </select>
                 </div>
                 <div class="text-center mt-4">

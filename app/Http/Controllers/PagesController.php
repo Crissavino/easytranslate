@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ConvertCurrencyRequest;
 use App\Models\Exchange;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class PagesController extends Controller
@@ -13,11 +13,13 @@ class PagesController extends Controller
         return view('pages.home');
     }
 
-    public function convertCurrency(Request $request)
+    public function convertCurrency(ConvertCurrencyRequest $request)
     {
-        $amount = $request->amount;
-        $source_currency = $request->source_currency;
-        $target_currency = $request->target_currency;
+
+        $validated = $request->validated();
+        $amount = $validated['amount'];
+        $source_currency = $validated['source_currency'];
+        $target_currency = $validated['target_currency'];
         $endpoint = 'latest';
         $access_key = env('FIXER_ACCESS_KEY');
 
@@ -59,10 +61,11 @@ class PagesController extends Controller
             Log::info('Error getting exchange rates');
             Log::info($e->getMessage());
 
-            return view('pages.home', [
+            return response()->view('pages.home', [
                 'success' => false,
                 'message' => 'Error getting exchange rates'
-            ]);
+            ])->setStatusCode(201);
+
         }
 
     }
