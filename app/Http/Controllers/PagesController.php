@@ -35,7 +35,6 @@ class PagesController extends Controller
             $exchangeSource = $exchangeRates['rates'][$source_currency];
             $exchangeTarget = $exchangeRates['rates'][$target_currency];
             $exchangeRate = $exchangeTarget / $exchangeSource;
-//            $exchangeRate = floatval(number_format($exchangeRate,2));
 
             $convertedAmount = $exchangeRate * $amount;
 
