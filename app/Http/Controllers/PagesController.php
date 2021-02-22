@@ -24,24 +24,12 @@ class PagesController extends Controller
         $access_key = env('FIXER_ACCESS_KEY');
 
         try {
-            // Initialize CURL:
-            $ch = curl_init('http://data.fixer.io/api/'.$endpoint.'?access_key='.$access_key);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $exchangeRates = $this->curlCall($endpoint, $access_key);
 
-            // Store the data:
-            $json = curl_exec($ch);
-            curl_close($ch);
-
-            // Decode JSON response:
-            $exchangeRates = json_decode($json, true);
-
-            // Get exchange rates for selected currencies
-            $exchangeSource = $exchangeRates['rates'][$source_currency];
-            $exchangeTarget = $exchangeRates['rates'][$target_currency];
-
-            $exchangeRate = $exchangeTarget / $exchangeSource;
-
-            $convertedAmount = $exchangeRate * $amount;
+            [
+                $exchangeRate,
+                $convertedAmount
+            ] = $this->processConversion($exchangeRates, $source_currency, $target_currency, $amount);
 
             Exchange::create([
                 'amount' => $amount,
@@ -71,6 +59,45 @@ class PagesController extends Controller
 
         }
 
+    }
+
+    /**
+     * @param string $endpoint
+     * @param $access_key
+     * @return mixed
+     */
+    protected function curlCall(string $endpoint, $access_key)
+    {
+        // Initialize CURL:
+        $ch = curl_init('http://data.fixer.io/api/' . $endpoint . '?access_key=' . $access_key);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Store the data:
+        $json = curl_exec($ch);
+        curl_close($ch);
+
+        // Decode JSON response:
+        return json_decode($json, true);
+    }
+
+    /**
+     * @param $exchangeRates
+     * @param $source_currency
+     * @param $target_currency
+     * @param $amount
+     * @return float[]|int[]
+     */
+    protected function processConversion($exchangeRates, $source_currency, $target_currency, $amount): array
+    {
+        // Get exchange rates for selected currencies
+        $exchangeSource = $exchangeRates['rates'][$source_currency];
+        $exchangeTarget = $exchangeRates['rates'][$target_currency];
+
+        $exchangeRate = $exchangeTarget / $exchangeSource;
+
+        $convertedAmount = $exchangeRate * $amount;
+
+        return array($exchangeRate, $convertedAmount);
     }
 
 }
