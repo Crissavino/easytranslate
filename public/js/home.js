@@ -1,5 +1,10 @@
 window.onload = async () => {
-    const currencies = await this.loadCurrencies();
+    let currencies;
+    if (localStorage.getItem('symbols')) {
+        currencies = JSON.parse(localStorage.getItem('symbols'));
+    } else {
+        currencies = await this.loadCurrencies();
+    }
     this.addCurrencies(currencies)
 }
 
@@ -8,6 +13,7 @@ async function loadCurrencies() {
         .then(response => response.json())
         .then(async (data) => {
             if (data.success) {
+                localStorage.setItem('symbols', JSON.stringify(Object.keys(data.symbols)));
                 return Object.keys(data.symbols);
             } else {
                 Swal.fire({
